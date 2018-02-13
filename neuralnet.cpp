@@ -1,6 +1,6 @@
 #include<iostream>
 #include<array>
-//#include<random>
+#include<random>
 
 using namespace std;
 
@@ -9,8 +9,18 @@ class Neuralnet{
 public:
     array<float, 2> weights;
     Neuralnet(){
-        weights[0] = 10.0;
-        weights[1] = 20.0;
+        int valor = 1;
+        for (int i = 0; i < weights.size(); i++){
+            weights[i] = valor;
+            valor ++;
+        }
+    }
+    
+    void get_1(){
+        for (float n : weights){
+            cout << n << "\n";
+        }
+
     }
 };
 
@@ -18,9 +28,7 @@ public:
 int main(){
 
     Neuralnet *n = new Neuralnet();
-    for (float k : n->weights){
-        cout << k << "\n";
-    }
+    n->get_1();
 
 
     return 0;
