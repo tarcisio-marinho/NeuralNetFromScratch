@@ -17,15 +17,27 @@ public:
         }
     }
     
+    // activation function
     int sign(float number){
-        if(number < 0){
-            return -1;
+        if(number >= 0){
+            return 1;
         }
-        return 1;
+        return -1;
     }
 
+    // random numbers to initialize weights
     float get_random(){
         return -1 + static_cast <float> (rand()) /( static_cast <float> (RAND_MAX/(1-(-1))));
+    }
+
+    // make a guess
+    int guess(vector<float> inputs){
+        float sum = 0;
+        for (int i = 0; i<weights.size(); i++){
+            sum += inputs[i] * weights[i];
+        }
+        
+        return sign(sum);
     }
 
 };
@@ -36,9 +48,7 @@ int main(int argc, char * argv[]){
     
     Neuralnet *n = new Neuralnet(2);
 
-    for(float k : n->weights){
-        cout << k << "\n";
-    }
+    cout << n->guess({-1, 0.5});
     
     return 0;
 }
