@@ -13,7 +13,7 @@ public:
     int label;
 
     Point(){
-        srand (static_cast <unsigned> (time(0)));
+        
         x = get_random();
         y = get_random();
 
@@ -26,7 +26,7 @@ public:
 
     // random numbers to initialize weights
     int  get_random(){
-        return 400 + static_cast <int> (rand()) /( static_cast <int> (RAND_MAX/(0-(400))));
+        return  0 + (rand() % static_cast<int>(400 - 0 + 1));
     }
 
 };
