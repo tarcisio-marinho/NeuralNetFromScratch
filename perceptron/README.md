@@ -5,7 +5,9 @@ Implementing Perceptron model
 ![alt text](perceptron.png)
 
 Perceptron is an one layer neural network.
+
 It will try to understand the patter and map the function
+
 Updating it's weights.
 
 ![alt text](download.png)
