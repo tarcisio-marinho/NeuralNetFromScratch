@@ -5,12 +5,12 @@
 
 using namespace std;
 
-class Neuralnet{    
+class Perceptron{    
 
 public:
     vector<float> weights;
 
-    Neuralnet(int number_weights){
+    Perceptron(int number_weights){
         srand (static_cast <unsigned> (time(0)));
         for (int i = 0; i< number_weights; i++){
             weights.push_back(get_random());
@@ -46,7 +46,7 @@ public:
 
 int main(int argc, char * argv[]){
     
-    Neuralnet *n = new Neuralnet(2);
+    Perceptron *n = new Perceptron(2);
 
     cout << n->guess({-1, 0.5});
     
