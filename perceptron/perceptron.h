@@ -17,7 +17,6 @@ public:
             weights.push_back(get_random());
         }
     }
-    
 
     // make a guess
     int guess(vector<float> inputs){

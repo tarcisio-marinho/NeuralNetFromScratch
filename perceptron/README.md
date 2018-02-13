@@ -12,8 +12,11 @@ Updating it's weights.
 
 ![alt text](download.png)
 
+Only works for linear separable datasets. 
 
+Only two categories.
 
+Independent of the dimension. 2D, 3D, 4D, etc ...
 
 # Training Algorithm:
 

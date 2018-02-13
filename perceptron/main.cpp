@@ -15,7 +15,7 @@ void create_dataset(int size, Perceptron *n){
 
     // training part
     for (Point *p : points){
-        n->train({p->x, p->y}, p->label);
+        n->train({p->x, p->y, p->bias}, p->label);
     }
 
     // testing with new data
@@ -42,7 +42,7 @@ void create_dataset(int size, Perceptron *n){
 
 int main(int argc, char * argv[]){
     
-    Perceptron *n = new Perceptron(2);
+    Perceptron *n = new Perceptron(3);
     create_dataset(100, n);
 
     return 0;
