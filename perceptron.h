@@ -1,4 +1,6 @@
-#include<iostream>
+#ifndef __PERCEPTRON__
+#define __PERCEPTRON__
+
 #include<vector>
 #include<random>
 #include <cstdlib>
@@ -42,13 +44,4 @@ public:
 
 };
 
-
-
-int main(int argc, char * argv[]){
-    
-    Perceptron *n = new Perceptron(2);
-
-    cout << n->guess({-1, 0.5});
-    
-    return 0;
-}
+#endif

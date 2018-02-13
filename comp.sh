@@ -1,3 +1,3 @@
-g++ neuralnet.cpp -o a -std=c++11
+g++ main.cpp -o a -std=c++11
 ./a
 
