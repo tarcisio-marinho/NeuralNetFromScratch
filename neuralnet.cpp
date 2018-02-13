@@ -1,10 +1,27 @@
 #include<iostream>
-#include<random>
+#include<array>
+//#include<random>
 
-class Neuralnet{
+using namespace std;
+
+class Neuralnet{    
+
 public:
-    
-
-private:
-    float weights [];
+    array<float, 2> weights;
+    Neuralnet(){
+        weights[0] = 10.0;
+        weights[1] = 20.0;
+    }
 };
+
+
+int main(){
+
+    Neuralnet *n = new Neuralnet();
+    for (float k : n->weights){
+        cout << k << "\n";
+    }
+
+
+    return 0;
+}
