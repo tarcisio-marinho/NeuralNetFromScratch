@@ -10,11 +10,10 @@ class Neuralnet{
 public:
     vector<float> weights;
 
-    Neuralnet(){
+    Neuralnet(int number_weights){
         srand (static_cast <unsigned> (time(0)));
-        int valor = 1;
-        for (int i = 0; i < weights.size(); i++){
-
+        for (int i = 0; i< number_weights; i++){
+            weights.push_back(get_random());
         }
     }
     
@@ -33,12 +32,12 @@ public:
 
 
 
-int main(){
+int main(int argc, char * argv[]){
     
-    Neuralnet *n = new Neuralnet();
+    Neuralnet *n = new Neuralnet(2);
 
-    for (int i = 0; i<10 ;i ++){
-        cout << n->get_random() << "\n";
+    for(float k : n->weights){
+        cout << k << "\n";
     }
     
     return 0;
