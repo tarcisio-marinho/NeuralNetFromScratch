@@ -10,8 +10,6 @@ using namespace std;
 class Perceptron{    
 
 public:
-    vector<float> weights;
-    float learning_rate = 0.1;
 
     Perceptron(int number_weights){
         srand (static_cast <unsigned> (time(0)));
@@ -20,18 +18,6 @@ public:
         }
     }
     
-    // activation function
-    int sign(float number){
-        if(number >= 0){
-            return 1;
-        }
-        return -1;
-    }
-
-    // random numbers to initialize weights
-    float get_random(){
-        return -1 + static_cast <float> (rand()) /( static_cast <float> (RAND_MAX/(1-(-1))));
-    }
 
     // make a guess
     int guess(vector<float> inputs){
@@ -56,6 +42,23 @@ public:
         }
     }
 
+private:
+
+    vector<float> weights;
+    float learning_rate = 0.1;
+
+    // activation function
+    int sign(float number){
+        if(number >= 0){
+            return 1;
+        }
+        return -1;
+    }
+
+    // random numbers to initialize weights
+    float get_random(){
+        return -1 + static_cast <float> (rand()) /( static_cast <float> (RAND_MAX/(1-(-1))));
+    }
 };
 
 #endif

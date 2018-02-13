@@ -24,6 +24,8 @@ public:
         }
     }   
 
+private:
+
     // random numbers to initialize weights
     int  get_random(){
         return  0 + (rand() % static_cast<int>(400 - 0 + 1));
