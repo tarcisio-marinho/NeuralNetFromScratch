@@ -43,6 +43,7 @@ public:
         return sign(sum);
     }
 
+    // training method
     void train(vector<float> inputs, int target){
         // get a guess
         int guess_g = guess(inputs);
