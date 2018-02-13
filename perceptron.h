@@ -3,7 +3,7 @@
 
 #include<vector>
 #include<random>
-#include <cstdlib>
+#include<cstdlib>
 
 using namespace std;
 
@@ -11,6 +11,7 @@ class Perceptron{
 
 public:
     vector<float> weights;
+    float learning_rate = 0.1;
 
     Perceptron(int number_weights){
         srand (static_cast <unsigned> (time(0)));
@@ -40,6 +41,18 @@ public:
         }
         
         return sign(sum);
+    }
+
+    void train(vector<float> inputs, int target){
+        // get a guess
+        int guess_g = guess(inputs);
+        // compute the error
+        int error = target - guess_g;
+
+        // backpropagation
+        for (int i = 0; i < weights.size(); i ++){
+            weights[i] += error * inputs[i] * learning_rate;
+        }
     }
 
 };
