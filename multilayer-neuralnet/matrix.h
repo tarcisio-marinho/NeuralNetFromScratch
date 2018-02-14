@@ -10,33 +10,37 @@ using namespace std;
 class Matrix{
 
 public:
+    
+    int n_rows, n_col;
+    vector<vector<int> > matrix;
+
     Matrix(int rows, int columns){
         n_rows = rows;
-        n_columns = columns;
+        n_col = columns;
 
-        for (int i=0; i < n_rows; i++){
-            for(int j =0; j< n_columns; j++){
-                matrix[i][j].push_back(0);
+        
+        for(int i = 0; i < n_rows; i++){
+            vector<int> novo;
+            for (int j=0; j < n_col; j++){
+                novo.push_back(0);
             }
+            matrix.push_back(novo);
         }
+        
     }
 
     void print(){
-        for (int i = 0; i< n_rows; i++){
-            for (int j : matrix[i]){
-                cout << j ; 
+        for(int i = 0; i < n_rows; i++){
+            for (int j=0; j < n_col; j++){
+                cout << matrix[i][j] << " ";
             }
-            cout << "\n";
+            cout << endl;
         }
     }
 
+    void add(){
 
-private:
-    int n_rows, n_columns;
-    vector<vector<int>> matrix;
-
-
-
+    }
     
 };
 
