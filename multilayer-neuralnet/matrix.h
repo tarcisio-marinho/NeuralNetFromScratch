@@ -14,7 +14,7 @@ public:
     int n_rows, n_col;
     vector<vector<float> > matrix;
 
-    Matrix(int rows, int columns){
+    Matrix(int rows, int columns, float start){
         n_rows = rows;
         n_col = columns;
 
@@ -22,7 +22,7 @@ public:
         for(int i = 0; i < n_rows; i++){
             vector<float> novo;
             for (int j = 0; j < n_col; j++){
-                novo.push_back(0);
+                novo.push_back(start);
             }
             matrix.push_back(novo);
         }
@@ -62,17 +62,22 @@ public:
         }
     }
 
-    void matmul(Matrix *mat){
+    Matrix * matmul(Matrix *mat){
         if(n_col != mat->n_rows){
-            return;
+            return NULL;
         }else{
-            Matrix * nova = new Matrix(n_rows, mat->n_col);
+            Matrix * nova = new Matrix(n_rows, mat->n_col, 0);
             
             for(int i = 0; i < nova->n_rows; i++){
                 for(int j = 0; j < nova->n_col; j++){
-                    
+                    float sum = 0;
+                    for(int  k = 0; k < n_col; k++){
+                        sum +=matrix[i][k]* mat->matrix[k][j]; 
+                    }
+                    nova->matrix[i][j] = sum;
                 }
             }
+            return nova;
 
 
         }

@@ -2,17 +2,18 @@
 #include "matrix.h"
 #include<vector>
 #include<iostream>
-#include<typeinfo>
 
 int main(int argc, char *argv[]){
 
-    Matrix *m = new Matrix(2, 2);
-    Matrix *n = new Matrix(2, 2);
-    m->add(1);
+    Matrix *m = new Matrix(2, 2, 3);
+    Matrix *n = new Matrix(2, 2, 4);
+    Matrix *c;
+    m->print();
 
-    n->add(3);
-    n->matadd(m);
     n->print();
+    c = n->matmul(m);
+    c->print();
+
     
     return 0;
 }
