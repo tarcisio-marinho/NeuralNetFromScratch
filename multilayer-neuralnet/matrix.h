@@ -83,6 +83,17 @@ public:
         }
     }
 
+    Matrix * transpose(){
+        Matrix * nova = new Matrix(n_col, n_rows, 0);
+
+        for(int i = 0; i< n_rows; i++){
+            for(int j = 0; j< n_col; j++){
+                nova->matrix[j][i] = matrix[i][j]; 
+            }
+        }
+        return nova;
+    }
+
 };
 
 

@@ -5,13 +5,10 @@
 
 int main(int argc, char *argv[]){
 
-    Matrix *m = new Matrix(2, 2, 3);
-    Matrix *n = new Matrix(2, 2, 4);
-    Matrix *c;
+    Matrix *m = new Matrix(4, 2, 3);
     m->print();
-
-    n->print();
-    c = n->matmul(m);
+    cout << endl;
+    Matrix *c = m->transpose();
     c->print();
 
     
