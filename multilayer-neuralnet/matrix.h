@@ -54,6 +54,30 @@ public:
         }
     }
 
+    void matadd(Matrix *mat){
+        for (int i=0; i < n_rows; i++){
+            for(int j = 0; j < n_col; j++){
+                matrix[i][j] += mat->matrix[i][j];
+            }
+        }
+    }
+
+    void matmul(Matrix *mat){
+        if(n_col != mat->n_rows){
+            return;
+        }else{
+            Matrix * nova = new Matrix(n_rows, mat->n_col);
+            
+            for(int i = 0; i < nova->n_rows; i++){
+                for(int j = 0; j < nova->n_col; j++){
+                    
+                }
+            }
+
+
+        }
+    }
+
 };
 
 

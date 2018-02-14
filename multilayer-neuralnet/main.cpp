@@ -7,10 +7,12 @@
 int main(int argc, char *argv[]){
 
     Matrix *m = new Matrix(2, 2);
+    Matrix *n = new Matrix(2, 2);
     m->add(1);
-    m->mul(5);
-    m->print();
-    cout << typeid(m);
 
+    n->add(3);
+    n->matadd(m);
+    n->print();
+    
     return 0;
 }
