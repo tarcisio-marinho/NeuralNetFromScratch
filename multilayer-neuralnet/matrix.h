@@ -12,7 +12,7 @@ class Matrix{
 public:
     
     int n_rows, n_col;
-    vector<vector<int> > matrix;
+    vector<vector<float> > matrix;
 
     Matrix(int rows, int columns){
         n_rows = rows;
@@ -20,8 +20,8 @@ public:
 
         
         for(int i = 0; i < n_rows; i++){
-            vector<int> novo;
-            for (int j=0; j < n_col; j++){
+            vector<float> novo;
+            for (int j = 0; j < n_col; j++){
                 novo.push_back(0);
             }
             matrix.push_back(novo);
@@ -38,10 +38,22 @@ public:
         }
     }
 
-    void add(){
-
+    void add(float number){
+        for (int i=0; i < n_rows; i++){
+            for(int j = 0; j < n_col; j++){
+                matrix[i][j] += number;
+            }
+        }
     }
-    
+
+    void mul(float number){
+        for (int i=0; i < n_rows; i++){
+            for(int j = 0; j < n_col; j++){
+                matrix[i][j] *= number;
+            }
+        }
+    }
+
 };
 
 
