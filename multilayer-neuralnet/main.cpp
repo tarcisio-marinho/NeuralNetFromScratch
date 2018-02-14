@@ -2,6 +2,7 @@
 #include "matrix.h"
 #include<vector>
 #include<iostream>
+#include<typeinfo>
 
 int main(int argc, char *argv[]){
 
@@ -9,6 +10,7 @@ int main(int argc, char *argv[]){
     m->add(1);
     m->mul(5);
     m->print();
+    cout << typeid(m);
 
     return 0;
 }
