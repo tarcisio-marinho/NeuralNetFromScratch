@@ -49,6 +49,14 @@ public:
         }
     }
 
+    void sub(float number){
+        for (int i=0; i < n_rows; i++){
+            for(int j = 0; j < n_col; j++){
+                matrix[i][j] -= number;
+            }
+        }
+    }
+
     void mul(float number){
         for (int i=0; i < n_rows; i++){
             for(int j = 0; j < n_col; j++){
