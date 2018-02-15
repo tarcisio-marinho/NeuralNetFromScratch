@@ -5,7 +5,7 @@
 
 int main(int argc, char *argv[]){
 
-    Matrix *m = new Matrix(4, 2);
+    NeuralNet *n = new NeuralNet(2, 2, 1);
     
     
     // float (*foo)(float);
