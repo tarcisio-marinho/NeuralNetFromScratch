@@ -5,12 +5,11 @@
 
 int main(int argc, char *argv[]){
 
-    Matrix *m = new Matrix(4, 2, 3);
-    m->print();
-    cout << endl;
-    Matrix *c = m->transpose();
-    c->print();
-
+    Matrix *m = new Matrix(4, 2);
     
+    
+    // float (*foo)(float);
+    // foo = &pi;
+
     return 0;
 }

@@ -10,11 +10,9 @@ using namespace std;
 class Matrix{
 
 public:
-    
-    int n_rows, n_col;
     vector<vector<float> > matrix;
 
-    Matrix(int rows, int columns, float start){
+    Matrix(int rows, int columns){
         n_rows = rows;
         n_col = columns;
 
@@ -22,11 +20,15 @@ public:
         for(int i = 0; i < n_rows; i++){
             vector<float> novo;
             for (int j = 0; j < n_col; j++){
-                novo.push_back(start);
+                novo.push_back(get_random());
             }
             matrix.push_back(novo);
         }
         
+    }
+
+    float get_random(){
+        return -1 + static_cast <float> (rand()) /( static_cast <float> (RAND_MAX/(1-(-1))));
     }
 
     void print(){
@@ -62,11 +64,21 @@ public:
         }
     }
 
+    void map(float (*func)(float)){
+
+        for (int i = 0; i< n_rows; i++){
+            for(int j = 0; j < n_col; j++){
+                float valor = matrix[i][j];
+                matrix[i][j] = func(valor);
+            }
+        }
+    }
+
     Matrix * matmul(Matrix *mat){
         if(n_col != mat->n_rows){
             return NULL;
         }else{
-            Matrix * nova = new Matrix(n_rows, mat->n_col, 0);
+            Matrix * nova = new Matrix(n_rows, mat->n_col);
             
             for(int i = 0; i < nova->n_rows; i++){
                 for(int j = 0; j < nova->n_col; j++){
@@ -84,7 +96,7 @@ public:
     }
 
     Matrix * transpose(){
-        Matrix * nova = new Matrix(n_col, n_rows, 0);
+        Matrix * nova = new Matrix(n_col, n_rows);
 
         for(int i = 0; i< n_rows; i++){
             for(int j = 0; j< n_col; j++){
@@ -94,6 +106,12 @@ public:
         return nova;
     }
 
+    Matrix * fromArray(float array[]){
+        int lenght = 0;
+    }
+
+private:
+    int n_rows, n_col;
 };
 
 
