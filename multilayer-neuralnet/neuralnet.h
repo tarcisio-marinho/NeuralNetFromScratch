@@ -24,30 +24,44 @@ public:
 
     }
 
-    float feedfoward(Matrix * input){
+    /**
+     * This feedfoward algorithm performs two weighted sums
+     * First weighted sum -> (input * weights_hidden_layer) + bias_hidden_layer
+     * Second weighted sum ->
+     * output from (first weighted sum * weighted_output_layer) + bias_output
+     */
+    Matrix * feedfoward(Matrix * input){
 
-        // Generating the hidden outputs
-        Matrix * hidden = weights_ih->matmul(input);
-        hidden->matadd(bias_h);
-
+        Matrix *hidden_layer_output, *output_layer_output;
         // Activation function
-        float (*sigmoid_func)(float);
-        sigmoid_func = &sigmoid;
-        hidden->map(sigmoid_func);
+        sigmoid_func = &NeuralNet::sigmoid;
+        
+        // Generating the hidden layer outputs
+        hidden_layer_output = weights_ih->matmul(input);
+        hidden_layer_output->matadd(bias_h);
+        hidden_layer_output->map(sigmoid_func);
+
+        // Generating the output layer output
+        output_layer_output = weights_ho->matmul(hidden_layer_output);
+        output_layer_output->matadd(bias_o);
+        output_layer_output->map(sigmoid_func);
+        
+        return output_layer_output; 
     }
 
     // activation function
-    float sigmoid(float x){
+    static float sigmoid(float x){
         return 1/(1 + exp(-x));
     }
 
 
 private:
-    int n_inputs, n_hidden, n_outputs;
-    Matrix * weights_ih;
-    Matrix * weights_ho;
-    Matrix * bias_h;
-    Matrix * bias_o;
+    int n_inputs, n_hidden, n_outputs; // number of nodes
+    float (*sigmoid_func)(float); // pointer to function
+    Matrix * weights_ih; // weights of hidden layer
+    Matrix * weights_ho; // weights of output layer
+    Matrix * bias_h; // bias of hidden layer
+    Matrix * bias_o; // bias of output layer
 
 
 };
