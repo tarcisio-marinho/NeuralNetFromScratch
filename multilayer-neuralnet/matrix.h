@@ -15,6 +15,7 @@ public:
     Matrix(int rows, int columns){
         n_rows = rows;
         n_col = columns;
+        srand (static_cast <unsigned> (time(0)));
 
         
         for(int i = 0; i < n_rows; i++){
@@ -72,6 +73,17 @@ public:
                 matrix[i][j] = func(valor);
             }
         }
+    }
+
+    Matrix * matsub(Matrix *mat){
+        Matrix * nova = new Matrix(n_rows, mat->n_col);
+        
+        for (int i=0; i < n_rows; i++){
+            for(int j = 0; j < n_col; j++){
+                nova->matrix[i][j] = matrix[i][j] - mat->matrix[i][j];
+            }
+        }
+        return nova;
     }
 
     Matrix * matmul(Matrix *mat){
