@@ -126,10 +126,6 @@ public:
         return nova;
     }
 
-    Matrix * fromArray(float array[]){
-        int lenght = 0;
-    }
-
 private:
     int n_rows, n_col;
 };

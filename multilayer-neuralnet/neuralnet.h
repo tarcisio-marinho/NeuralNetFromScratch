@@ -46,7 +46,14 @@ public:
         output_layer_output->matadd(bias_o);
         output_layer_output->map(sigmoid_func);
         
-        return output_layer_output; 
+        return output_layer_output; // Probability output
+    }
+
+    void train(Matrix * input, Matrix * targets){
+        Matrix * output = feedfoward(input);
+        Matrix * output_errors = targets->subtract(output);
+
+
     }
 
     // activation function
