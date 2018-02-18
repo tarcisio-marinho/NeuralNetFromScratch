@@ -112,3 +112,11 @@ Matrix::Matrix * transpose(){
     }
     return nova;
 }
+
+Matrix::static Matrix * fromArray(vector<int> vector){
+    Matrix * nova = new Matrix(vector.size(), 1);
+    for (int i = 0; i < vector.size(); i++){
+        nova->matrix[i][0] = vector[i];
+    }
+    return nova;
+}

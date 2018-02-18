@@ -41,8 +41,13 @@ NeuralNet::Matrix * feedfoward(Matrix * input){
 
 NeuralNet::void train(Matrix * input, Matrix * targets){
     Matrix * output = feedfoward(input);
+
+    // Calculate the erro -> ERROR = TARGET - OUTPUTS
     Matrix * output_errors = targets->subtract(output);
 
+    // Calculate the hidden layer errors
+    Matrix * weights_ho_transposed = weights_ho.transpose();
+    Matrix * hidden_errors = weights_ho_transposed.matmul(output_errors);
 
 }
 

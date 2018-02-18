@@ -24,6 +24,7 @@ public:
     Matrix * matsub(Matrix *mat);
     Matrix * matmul(Matrix *mat);
     Matrix * transpose();
+    Matrix * fromArray(float vector[]);
 
 private:
     int n_rows, n_col;
