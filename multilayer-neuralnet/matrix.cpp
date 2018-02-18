@@ -15,11 +15,11 @@ Matrix::Matrix(int rows, int columns){
     }
 }
 
-Matrix::float get_random(){
+float Matrix::get_random(){
     return -1 + static_cast <float> (rand()) /( static_cast <float> (RAND_MAX/(1-(-1))));
 }
 
-Matrix::void print(){
+void Matrix::print(){
     for(int i = 0; i < n_rows; i++){
         for (int j=0; j < n_col; j++){
             cout << matrix[i][j] << " ";
@@ -28,7 +28,7 @@ Matrix::void print(){
     }
 }
 
-Matrix::void add(float number){
+void Matrix::add(float number){
     for (int i=0; i < n_rows; i++){
         for(int j = 0; j < n_col; j++){
             matrix[i][j] += number;
@@ -36,7 +36,7 @@ Matrix::void add(float number){
     }
 }
 
-Matrix::void sub(float number){
+void Matrix::sub(float number){
     for (int i=0; i < n_rows; i++){
         for(int j = 0; j < n_col; j++){
             matrix[i][j] -= number;
@@ -44,7 +44,7 @@ Matrix::void sub(float number){
     }
 }
 
-Matrix::void mul(float number){
+void Matrix::mul(float number){
     for (int i=0; i < n_rows; i++){
         for(int j = 0; j < n_col; j++){
             matrix[i][j] *= number;
@@ -52,7 +52,7 @@ Matrix::void mul(float number){
     }
 }
 
-Matrix::void matadd(Matrix *mat){
+void Matrix::matadd(Matrix *mat){
     for (int i=0; i < n_rows; i++){
         for(int j = 0; j < n_col; j++){
             matrix[i][j] += mat->matrix[i][j];
@@ -60,7 +60,7 @@ Matrix::void matadd(Matrix *mat){
     }
 }
 
-Matrix::void map(float (*func)(float)){
+void Matrix::map(float (*func)(float)){
 
     for (int i = 0; i< n_rows; i++){
         for(int j = 0; j < n_col; j++){
@@ -70,7 +70,7 @@ Matrix::void map(float (*func)(float)){
     }
 }
 
-Matrix::Matrix * matsub(Matrix *mat){
+Matrix * Matrix::matsub(Matrix *mat){
     Matrix * nova = new Matrix(n_rows, mat->n_col);
     
     for (int i=0; i < n_rows; i++){
@@ -81,7 +81,7 @@ Matrix::Matrix * matsub(Matrix *mat){
     return nova;
 }
 
-Matrix::Matrix * matmul(Matrix *mat){
+Matrix * Matrix::matmul(Matrix *mat){
     if(n_col != mat->n_rows){
         return NULL;
     }else{
@@ -102,7 +102,7 @@ Matrix::Matrix * matmul(Matrix *mat){
     }
 }
 
-Matrix::Matrix * transpose(){
+Matrix * Matrix::transpose(){
     Matrix * nova = new Matrix(n_col, n_rows);
 
     for(int i = 0; i< n_rows; i++){
@@ -113,7 +113,7 @@ Matrix::Matrix * transpose(){
     return nova;
 }
 
-Matrix::static Matrix * fromArray(vector<int> vector){
+static Matrix * fromArray(vector<int> vector){
     Matrix * nova = new Matrix(vector.size(), 1);
     for (int i = 0; i < vector.size(); i++){
         nova->matrix[i][0] = vector[i];

@@ -20,7 +20,7 @@ NeuralNet::NeuralNet(int inputs, int hidden, int outputs){
  * Second weighted sum ->
  * output from (first weighted sum * weighted_output_layer) + bias_output
  */
-NeuralNet::Matrix * feedfoward(Matrix * input){
+Matrix * NeuralNet::feedfoward(Matrix * input){
 
     Matrix *hidden_layer_output, *output_layer_output;
     // Activation function
@@ -39,7 +39,7 @@ NeuralNet::Matrix * feedfoward(Matrix * input){
     return output_layer_output; // Probability output
 }
 
-NeuralNet::void train(Matrix * input, Matrix * targets){
+void NeuralNet::train(Matrix * input, Matrix * targets){
     Matrix * output = feedfoward(input);
 
     // Calculate the erro -> ERROR = TARGET - OUTPUTS
@@ -52,6 +52,6 @@ NeuralNet::void train(Matrix * input, Matrix * targets){
 }
 
 // activation function
-NeuralNet::static float sigmoid(float x){
+static float sigmoid(float x){
     return 1/(1 + exp(-x));
 }
