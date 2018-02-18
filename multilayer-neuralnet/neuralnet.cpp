@@ -24,17 +24,17 @@ Matrix * NeuralNet::feedfoward(Matrix * input){
 
     Matrix *hidden_layer_output, *output_layer_output;
     // Activation function
-    sigmoid_func = &NeuralNet::sigmoid;
+    apply_function = &NeuralNet::sigmoid;
     
     // Generating the hidden layer outputs
     hidden_layer_output = weights_ih->matmul(input);
     hidden_layer_output->matadd(bias_h);
-    hidden_layer_output->map(sigmoid_func);
+    hidden_layer_output->map(apply_function);
 
     // Generating the output layer output
     output_layer_output = weights_ho->matmul(hidden_layer_output);
     output_layer_output->matadd(bias_o);
-    output_layer_output->map(sigmoid_func);
+    output_layer_output->map(apply_function);
     
     return output_layer_output; // Probability output
 }
@@ -43,15 +43,15 @@ void NeuralNet::train(Matrix * input, Matrix * targets){
     Matrix * output = feedfoward(input);
 
     // Calculate the erro -> ERROR = TARGET - OUTPUTS
-    Matrix * output_errors = targets->subtract(output);
+    Matrix * output_errors = targets->matsub(output);
 
     // Calculate the hidden layer errors
-    Matrix * weights_ho_transposed = weights_ho.transpose();
-    Matrix * hidden_errors = weights_ho_transposed.matmul(output_errors);
+    Matrix * weights_ho_transposed = weights_ho->transpose();
+    Matrix * hidden_errors = weights_ho_transposed->matmul(output_errors);
 
 }
 
 // activation function
-static float sigmoid(float x){
+static float NeuralNet::sigmoid(float x){
     return 1/(1 + exp(-x));
 }
