@@ -1,6 +1,6 @@
 #include "neuralnet.h"
 
-Matrix::NeuralNet(int inputs, int hidden, int outputs){
+NeuralNet::NeuralNet(int inputs, int hidden, int outputs){
     n_inputs = inputs;
     n_hidden = hidden;
     n_outputs = outputs;
@@ -20,7 +20,7 @@ Matrix::NeuralNet(int inputs, int hidden, int outputs){
  * Second weighted sum ->
  * output from (first weighted sum * weighted_output_layer) + bias_output
  */
-Matrix::Matrix * feedfoward(Matrix * input){
+NeuralNet::Matrix * feedfoward(Matrix * input){
 
     Matrix *hidden_layer_output, *output_layer_output;
     // Activation function
@@ -39,7 +39,7 @@ Matrix::Matrix * feedfoward(Matrix * input){
     return output_layer_output; // Probability output
 }
 
-Matrix::void train(Matrix * input, Matrix * targets){
+NeuralNet::void train(Matrix * input, Matrix * targets){
     Matrix * output = feedfoward(input);
     Matrix * output_errors = targets->subtract(output);
 
@@ -47,6 +47,6 @@ Matrix::void train(Matrix * input, Matrix * targets){
 }
 
 // activation function
-Matrix::static float sigmoid(float x){
+NeuralNet::static float sigmoid(float x){
     return 1/(1 + exp(-x));
 }
