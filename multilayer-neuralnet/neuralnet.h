@@ -15,7 +15,8 @@ public:
     NeuralNet(int inputs, int hidden, int outputs);
     Matrix * feedfoward(Matrix * input);
     void train(Matrix * input, Matrix * targets);
-    float sigmoid(float x);
+    static float sigmoid(float x);
+    static float derivate_sigmoid(float y);
 
     float (*apply_function)(float); // pointer to function
     Matrix * weights_ih; // weights of hidden layer
