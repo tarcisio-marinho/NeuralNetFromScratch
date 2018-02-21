@@ -74,9 +74,9 @@ void NeuralNet::train(Matrix * inputs, Matrix * targets){
     // Calculate the erro -> ERROR = TARGET - OUTPUTS
     Matrix * output_errors = targets->matsub(output_layer_output);
 
-    output_layer_output.map(apply_function2);
-    output_layer_output.matmul(output_errors);
-    output_layer_output.mul(learning_rate);
+    output_layer_output->map(apply_function2);
+    output_layer_output->matmul(output_errors);
+    output_layer_output->mul(learning_rate);
 
     // Calculate the hidden layer errors
     Matrix * weights_ho_transposed = weights_ho->transpose();
