@@ -12,6 +12,7 @@ NeuralNet::NeuralNet(int inputs, int hidden, int outputs){
     // biases 
     bias_h = new Matrix(n_hidden, 1);
     bias_o = new Matrix(n_outputs, 1);
+    learning_rate = 0.1;
 }
 
 /**
@@ -25,6 +26,7 @@ Matrix * NeuralNet::feedfoward(Matrix * input){
     Matrix *hidden_layer_output, *output_layer_output;
     // Activation function
     apply_function = &NeuralNet::sigmoid;
+    apply_function2 = &NeuralNet::derivate_sigmoid;
     
     // Generating the hidden layer outputs
     hidden_layer_output = weights_ih->matmul(input);
@@ -72,6 +74,10 @@ void NeuralNet::train(Matrix * inputs, Matrix * targets){
     // Calculate the erro -> ERROR = TARGET - OUTPUTS
     Matrix * output_errors = targets->matsub(output_layer_output);
 
+    output_layer_output.map(apply_function2);
+    output_layer_output.matmul(output_errors);
+    output_layer_output.mul(learning_rate);
+
     // Calculate the hidden layer errors
     Matrix * weights_ho_transposed = weights_ho->transpose();
     Matrix * hidden_errors = weights_ho_transposed->matmul(output_errors);
@@ -85,4 +91,26 @@ float NeuralNet::sigmoid(float x){
 
 float NeuralNet::derivate_sigmoid(float y){
     return y * (1 - y);
+}
+
+
+void NeuralNet::save_neuralnet(NeuralNet * n, const char * name){
+    FILE *f;
+    f = fopen(name, "wb");
+    if(f != NULL){
+        fwrite(n, sizeof(n), 1, f);
+    }
+
+    fclose(f);
+}
+
+
+NeuralNet * NeuralNet::load_neuralnet(const char *path){
+    NeuralNet *n;
+    FILE *f;
+    f = fopen(path, "rb");
+    if(f != NULL){
+        fread(n, sizeof(n), 1, f);
+    }
+    return n;
 }
