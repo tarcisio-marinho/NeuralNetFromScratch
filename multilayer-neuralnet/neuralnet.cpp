@@ -21,7 +21,7 @@ NeuralNet::NeuralNet(int inputs, int hidden, int outputs){
  * Second weighted sum ->
  * output from (first weighted sum * weighted_output_layer) + bias_output
  */
-Matrix * NeuralNet::feedfoward(Matrix * input){
+Matrix * NeuralNet::predict(Matrix * input){
 
     Matrix *hidden_layer_output, *output_layer_output;
     // Activation function
@@ -85,8 +85,12 @@ void NeuralNet::train(Matrix * inputs, Matrix * targets){
     gradients->matmul(output_errors);
     gradients->mul(learning_rate);
 
+    // Calculate deltas
     Matrix * hidden_transposed = hidden_layer_output->transpose();
+    Matrix * weight_ho_deltas = gradients->matmul(hidden_transposed);
 
+
+    weights_ho->matadd(weight_ho_deltas);
 
 
 
@@ -95,6 +99,17 @@ void NeuralNet::train(Matrix * inputs, Matrix * targets){
     // Calculate the hidden layer errors
     Matrix * weights_ho_transposed = weights_ho->transpose();
     Matrix * hidden_errors = weights_ho_transposed->matmul(output_errors);
+
+    // Calculate hidden gradient
+    Matrix * hidden_gradient = Matrix::map_static(hidden_layer_output, apply_function2);
+    hidden_gradient->matmul(hidden_errors);
+    hidden_gradient->mul(learning_rate);
+
+    // Calculate input -> hidden deltas
+    Matrix * inputs_transposed = inputs->transpose();
+    Matrix * weight_ih_deltas = hidden_gradient->matmul(inputs_transposed);
+
+    weights_ih->matadd(weight_ih_deltas);
 
 }
 

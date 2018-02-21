@@ -13,7 +13,7 @@ class NeuralNet{
 public:
     int n_inputs, n_hidden, n_outputs; // number of nodes
     NeuralNet(int inputs, int hidden, int outputs);
-    Matrix * feedfoward(Matrix * input);
+    Matrix * predict(Matrix * input);
     void train(Matrix * input, Matrix * targets);
     static float sigmoid(float x);
     static float derivate_sigmoid(float y);
