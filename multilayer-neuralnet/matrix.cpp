@@ -70,6 +70,20 @@ void Matrix::map(float (*func)(float)){
     }
 }
 
+
+Matrix * Matrix::map_static(Matrix * m, float (*func)(float)){
+    Matrix * nova = new Matrix(m->n_rows, m->n_col);
+
+    for (int i = 0; i < m->n_rows; i++){
+        for (int j = 0; j < m->n_col; j++){
+            float valor = m->matrix[i][j];
+            nova->matrix[i][j] = valor;
+        }
+    }
+    return nova;
+}
+
+
 Matrix * Matrix::matsub(Matrix *mat){
     Matrix * nova = new Matrix(n_rows, mat->n_col);
     

@@ -74,9 +74,23 @@ void NeuralNet::train(Matrix * inputs, Matrix * targets){
     // Calculate the erro -> ERROR = TARGET - OUTPUTS
     Matrix * output_errors = targets->matsub(output_layer_output);
 
+    
     output_layer_output->map(apply_function2);
     output_layer_output->matmul(output_errors);
     output_layer_output->mul(learning_rate);
+
+
+    // Calculate gradient
+    Matrix * gradients = Matrix::map_static(output_layer_output, apply_function2);
+    gradients->matmul(output_errors);
+    gradients->mul(learning_rate);
+
+    Matrix * hidden_transposed = hidden_layer_output->transpose();
+
+
+
+
+
 
     // Calculate the hidden layer errors
     Matrix * weights_ho_transposed = weights_ho->transpose();
@@ -112,5 +126,6 @@ NeuralNet * NeuralNet::load_neuralnet(const char *path){
     if(f != NULL){
         fread(n, sizeof(n), 1, f);
     }
+    fclose(f);
     return n;
 }

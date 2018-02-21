@@ -21,6 +21,7 @@ public:
     void mul(float number);
     void matadd(Matrix *mat);
     void map(float (*func)(float));
+    static Matrix * map_static(Matrix * m, float (*func)(float));
     Matrix * matsub(Matrix *mat);
     Matrix * matmul(Matrix *mat);
     Matrix * transpose();
