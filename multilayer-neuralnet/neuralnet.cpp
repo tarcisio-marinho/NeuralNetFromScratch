@@ -1,6 +1,6 @@
 #include "neuralnet.h"
 
-NeuralNet::NeuralNet(int inputs, int hidden, int outputs, float lr=0.1){
+NeuralNet::NeuralNet(int inputs, int hidden, int outputs, float lr=0.1, int n_epochs=50){
     this->n_inputs = inputs;
     this->n_hidden = hidden;
     this->n_outputs = outputs;
@@ -13,6 +13,7 @@ NeuralNet::NeuralNet(int inputs, int hidden, int outputs, float lr=0.1){
     this->bias_h = new Matrix(n_hidden, 1);
     this->bias_o = new Matrix(n_outputs, 1);
     this->learning_rate = lr;
+    this->n_epochs = n_epochs;
 }
 
 /**
@@ -41,6 +42,7 @@ Matrix * NeuralNet::predict(Matrix * input){
     return output_layer_output; // Probability output
 }
 
+// Train the neuralnet 
 void NeuralNet::fit(Matrix * inputs, Matrix * targets){
     Matrix *hidden_layer_output, *output_layer_output;
     apply_function = &NeuralNet::sigmoid;
