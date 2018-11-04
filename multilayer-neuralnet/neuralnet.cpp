@@ -1,18 +1,18 @@
 #include "neuralnet.h"
 
-NeuralNet::NeuralNet(int inputs, int hidden, int outputs){
-    n_inputs = inputs;
-    n_hidden = hidden;
-    n_outputs = outputs;
+NeuralNet::NeuralNet(int inputs, int hidden, int outputs, float lr=0.1){
+    this->n_inputs = inputs;
+    this->n_hidden = hidden;
+    this->n_outputs = outputs;
     
     // weights matrixes
-    weights_ih = new Matrix(n_hidden, n_inputs);
-    weights_ho = new Matrix(n_outputs, n_hidden);
+    this->weights_ih = new Matrix(n_hidden, n_inputs);
+    this->weights_ho = new Matrix(n_outputs, n_hidden);
 
     // biases 
-    bias_h = new Matrix(n_hidden, 1);
-    bias_o = new Matrix(n_outputs, 1);
-    learning_rate = 0.1;
+    this->bias_h = new Matrix(n_hidden, 1);
+    this->bias_o = new Matrix(n_outputs, 1);
+    this->learning_rate = lr;
 }
 
 /**
@@ -41,7 +41,7 @@ Matrix * NeuralNet::predict(Matrix * input){
     return output_layer_output; // Probability output
 }
 
-void NeuralNet::train(Matrix * inputs, Matrix * targets){
+void NeuralNet::fit(Matrix * inputs, Matrix * targets){
     Matrix *hidden_layer_output, *output_layer_output;
     apply_function = &NeuralNet::sigmoid;
     
@@ -118,11 +118,12 @@ float NeuralNet::sigmoid(float x){
     return 1/(1 + exp(-x));
 }
 
+// derivate of the activation function for back propagation
 float NeuralNet::derivate_sigmoid(float y){
     return y * (1 - y);
 }
 
-
+// Funciton to store on disk the neuralnet state
 void NeuralNet::save_neuralnet(NeuralNet * n, const char * name){
     FILE *f;
     f = fopen(name, "wb");
@@ -133,7 +134,7 @@ void NeuralNet::save_neuralnet(NeuralNet * n, const char * name){
     fclose(f);
 }
 
-
+// Function to load from disk a neuralnet
 NeuralNet * NeuralNet::load_neuralnet(const char *path){
     NeuralNet *n;
     FILE *f;

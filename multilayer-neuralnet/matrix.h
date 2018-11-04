@@ -6,15 +6,16 @@
 #include<ctime>
 #include<iostream>
 
-using namespace std;
 
 class Matrix{
+private: 
+    float get_random();
+    int n_rows, n_col;
 
 public:
-    vector<vector<float> > matrix;
-
+    std::vector<std::vector<float> > matrix;
+    
     Matrix(int rows, int columns);
-    float get_random();
     void print();
     void add(float number);
     void sub(float number);
@@ -27,8 +28,6 @@ public:
     Matrix * transpose();
     static Matrix * fromArray(float vector[]);
 
-private:
-    int n_rows, n_col;
 };
 
 #endif

@@ -7,7 +7,7 @@ Matrix::Matrix(int rows, int columns){
 
     
     for(int i = 0; i < n_rows; i++){
-        vector<float> novo;
+        std::vector<float> novo;
         for (int j = 0; j < n_col; j++){
             novo.push_back(get_random());
         }
@@ -15,19 +15,22 @@ Matrix::Matrix(int rows, int columns){
     }
 }
 
+// Return random float number
 float Matrix::get_random(){
     return -1 + static_cast <float> (rand()) /( static_cast <float> (RAND_MAX/(1-(-1))));
 }
 
+// Print the matrix
 void Matrix::print(){
     for(int i = 0; i < n_rows; i++){
         for (int j=0; j < n_col; j++){
-            cout << matrix[i][j] << " ";
+            std::cout << matrix[i][j] << " ";
         }
-        cout << endl;
+        std::cout << std::endl;
     }
 }
 
+// Add scalar number to matrix
 void Matrix::add(float number){
     for (int i=0; i < n_rows; i++){
         for(int j = 0; j < n_col; j++){
@@ -36,6 +39,7 @@ void Matrix::add(float number){
     }
 }
 
+// Sub scalar number to matrix
 void Matrix::sub(float number){
     for (int i=0; i < n_rows; i++){
         for(int j = 0; j < n_col; j++){
@@ -44,6 +48,8 @@ void Matrix::sub(float number){
     }
 }
 
+
+// Multiply scalar number to matrix
 void Matrix::mul(float number){
     for (int i=0; i < n_rows; i++){
         for(int j = 0; j < n_col; j++){
@@ -52,6 +58,7 @@ void Matrix::mul(float number){
     }
 }
 
+// Add two matrixes
 void Matrix::matadd(Matrix *mat){
     for (int i=0; i < n_rows; i++){
         for(int j = 0; j < n_col; j++){
@@ -60,6 +67,7 @@ void Matrix::matadd(Matrix *mat){
     }
 }
 
+// Apply function to all elements from matrix
 void Matrix::map(float (*func)(float)){
 
     for (int i = 0; i< n_rows; i++){
@@ -83,7 +91,7 @@ Matrix * Matrix::map_static(Matrix * m, float (*func)(float)){
     return nova;
 }
 
-
+// Sub two matrixes
 Matrix * Matrix::matsub(Matrix *mat){
     Matrix * nova = new Matrix(n_rows, mat->n_col);
     
@@ -95,6 +103,7 @@ Matrix * Matrix::matsub(Matrix *mat){
     return nova;
 }
 
+// Multiply two matrixes
 Matrix * Matrix::matmul(Matrix *mat){
     if(n_col != mat->n_rows){
         return NULL;
@@ -116,6 +125,8 @@ Matrix * Matrix::matmul(Matrix *mat){
     }
 }
 
+
+// The transpose of a matrix
 Matrix * Matrix::transpose(){
     Matrix * nova = new Matrix(n_col, n_rows);
 
@@ -127,7 +138,9 @@ Matrix * Matrix::transpose(){
     return nova;
 }
 
-static Matrix * fromArray(vector<int> vector){
+
+// Create a new Matrix from an std::vector
+static Matrix * fromArray(std::vector<int> vector){
     Matrix * nova = new Matrix(vector.size(), 1);
     for (int i = 0; i < vector.size(); i++){
         nova->matrix[i][0] = vector[i];
