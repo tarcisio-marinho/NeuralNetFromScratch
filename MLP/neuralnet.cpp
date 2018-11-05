@@ -28,7 +28,7 @@ NeuralNet::NeuralNet(int inputs, int hidden, int outputs, float lr){
  * output from (first weighted sum * weighted_output_layer) + bias_output
  */
 Matrix * NeuralNet::predict(Matrix * input){
-    
+
     // Generating the hidden layer outputs
     Matrix *hidden_layer_output = weights_ih->matmul(input);
     hidden_layer_output->matadd(bias_h);
@@ -67,6 +67,7 @@ void NeuralNet::fit(Matrix * inputs, Matrix * targets){
     // Activation function
     output_layer_output->map(apply_function);
 
+
     /*
         BackPropagation
     */
@@ -75,11 +76,6 @@ void NeuralNet::fit(Matrix * inputs, Matrix * targets){
     Matrix * output_errors = targets->matsub(output_layer_output);
 
     
-    output_layer_output->map(apply_function2);
-    output_layer_output->matmul(output_errors);
-    output_layer_output->mul(learning_rate);
-
-
     // Calculate gradient
     Matrix * gradients = Matrix::map_static(output_layer_output, apply_function2);
     gradients->matmul(output_errors);
@@ -89,10 +85,10 @@ void NeuralNet::fit(Matrix * inputs, Matrix * targets){
     Matrix * hidden_transposed = hidden_layer_output->transpose();
     Matrix * weight_ho_deltas = gradients->matmul(hidden_transposed);
 
-
+    // adjust the weights by deltas
     weights_ho->matadd(weight_ho_deltas);
-
-
+    // adjust the bias by its deltas
+    bias_o->matadd(gradients);
 
 
     // Calculate the hidden layer errors
@@ -109,7 +105,7 @@ void NeuralNet::fit(Matrix * inputs, Matrix * targets){
     Matrix * weight_ih_deltas = hidden_gradient->matmul(inputs_transposed);
 
     weights_ih->matadd(weight_ih_deltas);
-
+    bias_h->matadd(hidden_gradient);
 }
 
 // activation function
