@@ -97,21 +97,15 @@ int main(int argc, char *argv[]){
     NeuralNet *nn = new NeuralNet(9, 10, 2);
     
     // testing 
-    //Matrix * test = Matrix::fromArray(std::vector<float>{1, 1, 2, 3, 4, 5, 1, 2, 3});
-    //Matrix * retorno = nn->predict(test);
-    //retorno->print();
+    Matrix * test = Matrix::fromArray(std::vector<float>{1, 1, 2, 3, 4, 5, 1, 2, 3});
+    Matrix * retorno = nn->predict(test);
+    retorno->print();
     
     
-    int vezes_entrou = 0;
-    int contador = 0;
+    int cont = 0;
     for (auto x : d->x){
-        std::cerr << "ENTROU: " << vezes_entrou << std::endl;
         Matrix * input = Matrix::fromArray(x);
-        Matrix *label = Matrix::fromArray(d->y[contador]);
+        Matrix *label = Matrix::fromArray(d->y[cont]);
         nn->fit(input, label);
-        vezes_entrou++;
     }
-
-
-
 }
