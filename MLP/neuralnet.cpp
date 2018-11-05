@@ -14,6 +14,11 @@ NeuralNet::NeuralNet(int inputs, int hidden, int outputs, float lr){
     this->bias_o = new Matrix(n_outputs, 1);
     this->learning_rate = lr;
     this->n_epochs = n_epochs;
+
+    // Activation function
+    this->apply_function = &NeuralNet::sigmoid;
+    this->apply_function2 = &NeuralNet::derivate_sigmoid;
+   
 }
 
 /**
@@ -23,19 +28,14 @@ NeuralNet::NeuralNet(int inputs, int hidden, int outputs, float lr){
  * output from (first weighted sum * weighted_output_layer) + bias_output
  */
 Matrix * NeuralNet::predict(Matrix * input){
-
-    Matrix *hidden_layer_output, *output_layer_output;
-    // Activation function
-    apply_function = &NeuralNet::sigmoid;
-    apply_function2 = &NeuralNet::derivate_sigmoid;
     
     // Generating the hidden layer outputs
-    hidden_layer_output = weights_ih->matmul(input);
+    Matrix *hidden_layer_output = weights_ih->matmul(input);
     hidden_layer_output->matadd(bias_h);
     hidden_layer_output->map(apply_function);
 
     // Generating the output layer output
-    output_layer_output = weights_ho->matmul(hidden_layer_output);
+    Matrix* output_layer_output = weights_ho->matmul(hidden_layer_output);
     output_layer_output->matadd(bias_o);
     output_layer_output->map(apply_function);
     
@@ -44,16 +44,13 @@ Matrix * NeuralNet::predict(Matrix * input){
 
 // Train the neuralnet 
 void NeuralNet::fit(Matrix * inputs, Matrix * targets){
-    Matrix *hidden_layer_output, *output_layer_output;
 
-    this->apply_function = &NeuralNet::sigmoid;
-    
     /*  FeedFoward
         Input -> Hidden
     */
 
     // Generating the hidden layer outputs
-    hidden_layer_output = weights_ih->matmul(inputs);
+    Matrix *hidden_layer_output = weights_ih->matmul(inputs);
     hidden_layer_output->matadd(bias_h); // PAU
     
     // Activation function
@@ -64,7 +61,7 @@ void NeuralNet::fit(Matrix * inputs, Matrix * targets){
     */
 
     // Generating the output layer output
-    output_layer_output = weights_ho->matmul(hidden_layer_output);
+    Matrix* output_layer_output = weights_ho->matmul(hidden_layer_output);
     output_layer_output->matadd(bias_o);
 
     // Activation function
