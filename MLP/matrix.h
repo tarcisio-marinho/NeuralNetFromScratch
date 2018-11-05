@@ -17,7 +17,8 @@ public:
     
     Matrix(int rows, int columns);
     Matrix(std::vector<std::vector<float> >);
-
+    
+    void print_rows_cols();
     void print();
     void add(float number);
     void sub(float number);

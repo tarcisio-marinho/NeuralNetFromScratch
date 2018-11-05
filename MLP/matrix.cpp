@@ -1,5 +1,10 @@
 #include "matrix.h"
 
+void Matrix::print_rows_cols(){
+    std::cout  << "Rows: " << this->n_rows << " Col: " << this->n_col << std::endl;
+}
+
+
 Matrix::Matrix(int rows, int columns){
     n_rows = rows;
     n_col = columns;
@@ -113,6 +118,7 @@ Matrix * Matrix::matsub(Matrix *mat){
 // Multiply two matrixes
 Matrix * Matrix::matmul(Matrix *mat){
     if(n_col != mat->n_rows){
+        std::cerr << "OPA" << std::endl;
         return NULL;
     }else{
         Matrix * nova = new Matrix(n_rows, mat->n_col);
