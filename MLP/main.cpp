@@ -17,6 +17,7 @@ public:
     std::vector<int> y;
 };
 
+
 std::vector<std::string> split(const std::string& s, const char& c)
 {
 	std::string buff{""};
@@ -33,9 +34,6 @@ std::vector<std::string> split(const std::string& s, const char& c)
 	return v;
 }
 
-void print(std::string data){
-    std::cout << data << std::endl;
-}
 
 Data* get_data(){
     std::vector<std::vector<int> > x;
@@ -52,9 +50,6 @@ Data* get_data(){
             ret.erase(ret.begin()); //  removes ID
 
             int value = atoi(ret[ret.size()-1].c_str()); // get the class
-            /*if(ret[ret.size()-1] == "4"){
-                value = 4
-            }*/
             y.push_back(value);
             ret.erase(ret.begin() + 9); // remove the class
             
@@ -78,32 +73,32 @@ Data* get_data(){
     }
 }
 
+void print_data_set(Data *d){
+    int contador = 0;
+    for(auto n : d->x){
+        for(int a : n){
+            std::cout << a << ",";
+        }
+        std::cout << d->y[contador] << std::endl; 
+        contador++;
+    }
+}
 
 
 int main(int argc, char *argv[]){
 
+    
     Data* d = get_data();
-    int contador= 0;
-    for(auto n:d->x){
-        for(int a : n){
-            std::cout << a << ",";
-        }
-        std::cout << "Classe: "<<d->y[contador] << std::endl; 
-        contador++;
-    }
+    print_data_set(d);
 
 /*
-    NeuralNet *n = new NeuralNet(2, 2, 1);
-    Matrix *data = new Matrix(2, 1);
-    Matrix *label = new Matrix(1, 1);
+    NeuralNet *n = new NeuralNet(9, 20, 2);
+
     n->fit(data, label);
 
 
     Matrix *output = n->predict(new Matrix(1, 1));
     output->print();
     
-    // float (*foo)(float);
-    // foo = &pi;
 */
-    return 0;
 }
