@@ -6,7 +6,6 @@
 #include<iostream>
 #include<cmath>
 
-using namespace std;
 
 class NeuralNet{
 private:
@@ -24,7 +23,7 @@ private:
     float (*apply_function2)(float); // pointer to function derivate_sigmoid
     
 public:
-    NeuralNet(int inputs, int hidden, int outputs, float lr=0.1, int n_epochs=50);
+    NeuralNet(int inputs, int hidden, int outputs, float lr, int n_epochs);
     Matrix * predict(Matrix * input);
     void fit(Matrix * input, Matrix * targets);
     static void save_neuralnet(NeuralNet * n, const char * name);
