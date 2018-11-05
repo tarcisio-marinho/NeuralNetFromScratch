@@ -15,6 +15,13 @@ Matrix::Matrix(int rows, int columns){
     }
 }
 
+Matrix::Matrix(std::vector<std::vector<float> > mat ){
+    this->matrix = mat;
+    this->n_rows = mat.size();
+    this->n_col = mat[0].size();
+}
+
+
 // Return random float number
 float Matrix::get_random(){
     return -1 + static_cast <float> (rand()) /( static_cast <float> (RAND_MAX/(1-(-1))));
@@ -140,7 +147,7 @@ Matrix * Matrix::transpose(){
 
 
 // Create a new Matrix from an std::vector
-static Matrix * fromArray(std::vector<int> vector){
+Matrix * Matrix::fromArray(std::vector<float> vector){
     Matrix * nova = new Matrix(vector.size(), 1);
     for (int i = 0; i < vector.size(); i++){
         nova->matrix[i][0] = vector[i];

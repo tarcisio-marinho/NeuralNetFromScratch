@@ -1,6 +1,6 @@
 #include "neuralnet.h"
 
-NeuralNet::NeuralNet(int inputs, int hidden, int outputs, float lr=0.1, int n_epochs=50){
+NeuralNet::NeuralNet(int inputs, int hidden, int outputs, float lr=0.1){
     this->n_inputs = inputs;
     this->n_hidden = hidden;
     this->n_outputs = outputs;
@@ -45,7 +45,8 @@ Matrix * NeuralNet::predict(Matrix * input){
 // Train the neuralnet 
 void NeuralNet::fit(Matrix * inputs, Matrix * targets){
     Matrix *hidden_layer_output, *output_layer_output;
-    apply_function = &NeuralNet::sigmoid;
+
+    this->apply_function = &NeuralNet::sigmoid;
     
     /*  FeedFoward
         Input -> Hidden
@@ -93,7 +94,6 @@ void NeuralNet::fit(Matrix * inputs, Matrix * targets){
 
 
     weights_ho->matadd(weight_ho_deltas);
-
 
 
 

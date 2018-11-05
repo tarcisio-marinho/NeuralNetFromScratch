@@ -16,6 +16,8 @@ public:
     std::vector<std::vector<float> > matrix;
     
     Matrix(int rows, int columns);
+    Matrix(std::vector<std::vector<float> >);
+
     void print();
     void add(float number);
     void sub(float number);
@@ -26,7 +28,7 @@ public:
     Matrix * matsub(Matrix *mat);
     Matrix * matmul(Matrix *mat);
     Matrix * transpose();
-    static Matrix * fromArray(float vector[]);
+    static Matrix * fromArray(std::vector<float>);
 
 };
 

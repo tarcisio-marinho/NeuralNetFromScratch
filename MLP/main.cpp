@@ -8,13 +8,13 @@
 
 class Data{
 public:
-    Data(std::vector<std::vector<int> > x, std::vector<int> y){
+    Data(std::vector<std::vector<float> > x, std::vector<float> y){
         this->x = x;
         this->y = y;
     }
 
-    std::vector<std::vector<int> > x;
-    std::vector<int> y;
+    std::vector<std::vector<float> > x;
+    std::vector<float> y;
 };
 
 
@@ -36,8 +36,8 @@ std::vector<std::string> split(const std::string& s, const char& c)
 
 
 Data* get_data(){
-    std::vector<std::vector<int> > x;
-    std::vector<int> y;
+    std::vector<std::vector<float> > x;
+    std::vector<float> y;
 
 
     std::ifstream file("data/breast-cancer-wisconsin.data");
@@ -49,19 +49,19 @@ Data* get_data(){
 
             ret.erase(ret.begin()); //  removes ID
 
-            int value = atoi(ret[ret.size()-1].c_str()); // get the class
+            int value = float(atoi(ret[ret.size()-1].c_str())); // get the class
             y.push_back(value);
             ret.erase(ret.begin() + 9); // remove the class
             
             // cleaning the '?' data
-            std::vector <int> aux;
+            std::vector <float> aux;
             bool achou;
             for (auto n: ret){
                 if(n == "?"){
                     achou = true;
                     n = "0";
                 }
-                aux.push_back(atoi(n.c_str()));
+                aux.push_back(float(atoi(n.c_str())));
             }
             x.push_back(aux);
 
@@ -87,18 +87,22 @@ void print_data_set(Data *d){
 
 int main(int argc, char *argv[]){
 
-    
+    // get the dataset    
     Data* d = get_data();
-    print_data_set(d);
 
-/*
+    // create the input matrix
+    Matrix *training_dataset = new Matrix(d->x);
+
+    // labels
+    Matrix *labels = Matrix::fromArray(d->y);
+
     NeuralNet *n = new NeuralNet(9, 20, 2);
 
-    n->fit(data, label);
+    n->fit(training_dataset, labels);
 
 
-    Matrix *output = n->predict(new Matrix(1, 1));
-    output->print();
+    //Matrix *output = n->predict(new Matrix(1, 1));
+   // output->print();
     
-*/
+
 }
