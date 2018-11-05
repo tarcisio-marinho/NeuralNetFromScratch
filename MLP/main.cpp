@@ -97,8 +97,10 @@ int main(int argc, char *argv[]){
     Matrix *labels = Matrix::fromArray(d->y);
 
     NeuralNet *n = new NeuralNet(9, 20, 2);
-
-    n->fit(training_dataset, labels);
+    Matrix * test = Matrix::fromArray(std::vector<float>{1, 1, 2, 3, 4, 5, 1, 2, 3});
+    Matrix * retorno = n->predict(test);
+    retorno->print();
+    //n->fit(training_dataset, labels);
 
 
     //Matrix *output = n->predict(new Matrix(1, 1));

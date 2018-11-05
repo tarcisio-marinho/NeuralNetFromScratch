@@ -1,6 +1,6 @@
 #include "neuralnet.h"
 
-NeuralNet::NeuralNet(int inputs, int hidden, int outputs, float lr=0.1){
+NeuralNet::NeuralNet(int inputs, int hidden, int outputs, float lr){
     this->n_inputs = inputs;
     this->n_hidden = hidden;
     this->n_outputs = outputs;
@@ -54,7 +54,7 @@ void NeuralNet::fit(Matrix * inputs, Matrix * targets){
 
     // Generating the hidden layer outputs
     hidden_layer_output = weights_ih->matmul(inputs);
-    hidden_layer_output->matadd(bias_h);
+    hidden_layer_output->matadd(bias_h); // PAU
     
     // Activation function
     hidden_layer_output->map(apply_function);
