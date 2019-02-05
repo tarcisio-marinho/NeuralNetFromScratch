@@ -12,6 +12,6 @@ def softmax(x):
     return np.exp(x) / np.sum(np.exp(x))
 
 def tanh(x):
-    pass
+    return (2 / 1 + np.exp(-2*x)) - 1
 
 print(softmax([3, 4, 5]), sigmoid(3))
