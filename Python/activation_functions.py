@@ -15,6 +15,4 @@ def tanh(x):
     return (2 / 1 + np.exp(-2*x)) - 1
 
 
-print((np.array([[1, 2, 3], [1, 2, 3]]).shape))
-
-print(softmax(np.array([3, 4, 5])), sigmoid(0))
+print(softmax(np.array([3, 4, 5])), sigmoid(-1))
