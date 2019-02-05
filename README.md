@@ -1,46 +1,14 @@
-# Perceptron model 
+# Neural Network from Scratch 
 
-Implementing Perceptron model
+NN from scratch is a implementation of a MLP in Python and CPP
 
-![alt text](perceptron.png)
+Each code is inside of each directory
 
-Perceptron is an one layer neural network.
+    Python/ -> python code
 
-It will try to understand the patter and map the function
+    cc/ -> cc code 
 
-Updating it's weights.
 
-![alt text](download.png)
+# Dependencies:
 
-Only works for linear separable datasets. 
-
-Only two categories.
-
-Independent of the dimension. 2D, 3D, 4D, etc ...
-
-# Training Algorithm:
-
-    Feed the perceptron with random data
-    Train the network with the data
-    Compute the error
-    Adjust the weights according to the error
-    Repeteat until all the dataset
-    
-    
-# Activation function: 
-
-    if(number >= 0){
-        return 1;
-    }
-        return -1;
-
-        
-# Error function:
-
-    error = label - guess
-    
-# Backpropagation: 
-  
-    learning_rate = 0.1
-    weight[i] += error * input[i] * learning_rate
-    
+    Numpy
