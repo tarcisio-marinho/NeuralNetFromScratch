@@ -118,8 +118,8 @@ Matrix * Matrix::matsub(Matrix *mat){
 // Multiply two matrixes
 Matrix * Matrix::matmul(Matrix *mat){
     if(n_col != mat->n_rows){
-        std::cerr << "n_col != n_rols" << std::endl;
-        return NULL;
+        throw "n_col != n_rols";
+
     }else{
         Matrix * nova = new Matrix(n_rows, mat->n_col);
         
