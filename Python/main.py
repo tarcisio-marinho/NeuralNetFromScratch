@@ -110,8 +110,7 @@ def training(net, epochs,lrate,n_outputs):
     return errors
 
 def predict(network, row):
-    outputs = forward_propagation(net, row)
-    return outputs
+    return forward_propagation(net, row)
 
 if __name__ == '__main__':
 
